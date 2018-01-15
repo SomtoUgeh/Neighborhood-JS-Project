@@ -1,91 +1,92 @@
 
 // Global Variables & Default Locations
-
 var map;
 var Location;
 var clientID;
 var clientSecret;
 
 // Default location for several points
-var defaultLocation = [
+var defaultLocations = [
     {
-        name: 'Winnemac Park',
+        title: 'Canna Cruz',
         location: {
-            lat: 41.9741,
-            long: -87.6820
+            lat: 36.9863342,
+            lng: -122.0324849
         }
     },
     {
-        name: 'Bracher Park',
+        title: 'Santa Cruz Naturals',
         location: {
-            lat: 37.402,
-            long: -122.052
+            lat: 36.9757459,
+            lng: -121.8882603
         }
     },
     {
-        name: 'Over Easy Cafe',
+        title: 'KindPeoples Collective',
         location: {
-            lat: 41.9718,
-            long: -87.6790
+            lat: 36.9856965,
+            lng: -121.9827407
         }
     },
     {
-        name: 'Hacker Dojo',
+        title: 'Granny Purps',
         location: {
-            lat: 37.402,
-            long: -122.052
+            lat: 36.9851404,
+            lng: -121.9659725
         }
     },
     {
-        name: 'House of Falafel',
+        title: 'Herbal Cruz',
         location: {
-            lat: 37.322,
-            long: -122.018
+            lat: 36.9671524,
+            lng: -121.9649442
         }
     },
     {
-        name: 'Pho Mai #1 Noodle House',
+        title: 'Central Coast Wellness Center',
         location: {
-            lat: 37.415,
-            long: -121.878
+            lat: 37.0721581,
+            lng: -122.0840406
         }
     }
-]
+];
 
 
 // Working with the foursquare API
 Location = function(data) {
     var self = this;
-    this.name = data.name;
-    this.lat = data.lat;
-    this.long= data.long;
+    this.name = data.title;
+    this.position = data.location;
     this.URL = '';
     this.street = '';
     this.city = '';
     this.phone = '';
 
+    this.visible = ko.observable(true);
+
     // Credentials for FOURSQUARE Api
-    clientID = 'QQFKNQDTD5FQDARWQZSZOPHYWYE1KRZDNRCIAMGZH2RQQHW5';
-    clientSecret = 'RYQF20YIJJKN3YROH0BNCYUKJGY4MGFRKDJHSSWDCKPLP2QS';
+    clientID = 'AEDY4G2EDEFQZUOPU1RZNVMOUX0X25LCTKM0SJQWQPQG24L3';
+    clientSecret = '5Y2UT2PWZRKVXBM0GJ5DBGRAXFK02M45XZVLAMYQSZMQVZWT';
 
     // Foursquare API endpoint build
     var fourSquareURL =  'https://api.foursquare.com/v2/venues/search?ll='
-        + this.lat + ',' + this.long + '&client_id=' + clientID
+        + this.position.lat + ',' + this.position.lng + '&client_id=' + clientID
         + '&client_secret=' + clientSecret + '&v=20170801' + '&query=' + this.name;
+        console.log(fourSquareURL);
 
-    $.getJSON(foursquareURL, function(data) {
-        console.log(data); // making sure data is sent back
-
+    // Gets the data from foursquare and store it into its' own variables.
+    $.getJSON(fourSquareURL).done(function (data) {
         var results = data.response.venues[0];
         self.URL = results.url;
         if (typeof self.URL === 'undefined') {
             self.URL = "";
         }
-        self.street = results.location.formattedAddress[0];
-        self.city = results.location.formattedAddress[1];
-        self.phone = results.contact.phone;
+
+        self.street = results.location.formattedAddress[0] || 'No Address Provided';
+        self.city = results.location.formattedAddress[1] || 'No Address Provided';
+        self.phone = results.contact.phone || 'No Phone Provided';
     }).fail(function () {
-        $(".venue-list").html('There was an error with the Foursquare API call. Please refresh the page and try again to load Foursquare data.');
+        $('.venue-list').html('There was an error with the Foursquare API call. Please refresh the page and try again to load Foursquare data.');
     });
 
     // This is what the infowindow will contain.
@@ -167,4 +168,33 @@ function ViewModel(){
     defaultLocations.forEach(function(locationItem){
         self.locationList.push( new Location(locationItem));
     });
+
+    // Searches for what user typed in the input bar using the locationlist array.
+    // Only displaying the exact item results that user type if available in the locationlist array.
+    this.filteredList = ko.computed( function() {
+        var filter = self.searchTerm().toLowerCase();
+        if (!filter) {
+            self.locationList().forEach(function(locationItem){
+                locationItem.visible(true);
+            });
+            return self.locationList();
+        } else {
+            return ko.utils.arrayFilter(self.locationList(), function(locationItem) {
+                var string = locationItem.name.toLowerCase();
+                var result = (string.search(filter) >= 0);
+                locationItem.visible(result);
+                return result;
+            });
+        }
+    }, self);
+}
+
+// Error handling if map doesn't load.
+function errorHandling() {
+    $('#map').html('We had trouble loading Google Maps. Please refresh your browser and try again.');
+}
+
+function runApp() {
+    ko.applyBindings(new ViewModel());
+}
 
