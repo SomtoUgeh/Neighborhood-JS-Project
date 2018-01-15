@@ -72,7 +72,6 @@ Location = function(data) {
     var fourSquareURL =  'https://api.foursquare.com/v2/venues/search?ll='
         + this.position.lat + ',' + this.position.lng + '&client_id=' + clientID
         + '&client_secret=' + clientSecret + '&v=20170801' + '&query=' + this.name;
-        console.log(fourSquareURL);
 
     // Gets the data from foursquare and store it into its' own variables.
     $.getJSON(fourSquareURL).done(function (data) {
@@ -82,17 +81,18 @@ Location = function(data) {
             self.URL = "";
         }
 
-        self.street = results.location.formattedAddress[0] || 'No Address Provided';
-        self.city = results.location.formattedAddress[1] || 'No Address Provided';
-        self.phone = results.contact.phone || 'No Phone Provided';
+        self.street = results.location.formattedAddress[0];
+        self.city = results.location.formattedAddress[1];
+        self.phone = results.contact.phone;
+
     }).fail(function () {
-        $('.venue-list').html('There was an error with the Foursquare API call. Please refresh the page and try again to load Foursquare data.');
+        $('.venue-list').html('There was an error with the Foursquare API call. Please refresh the page and try again');
     });
 
     // This is what the infowindow will contain.
     this.contentString =
         '<div class="info-window-content">' +
-        '<div class="title"><b>' + data.name + "</b></div>" +
+        '<div class="title"><b>' + data.title + "</b></div>" +
         '<div class="content"><a href="' + self.URL + '">' + self.URL + "</a></div>" +
         '<div class="content">' + self.street + "</div>" +
         '<div class="content">' + self.city + "</div>" +
@@ -104,9 +104,9 @@ Location = function(data) {
 
     // Placing the markers
     this.marker = new google.maps.Marker({
-        position: new google.maps.LatLng(data.lat, data.long),
-        map: map,
-        title: data.name
+        position: new google.maps.LatLng(data.location[0], data.location[1]),
+        title: data.title,
+        map: map
     });
 
     // Setting selected marker visibility.
@@ -123,7 +123,7 @@ Location = function(data) {
     this.marker.addListener('click', function(){
         self.contentString =
             '<div class="info-window-content">' +
-            '<div class="title"><b>' + data.name + "</b></div>" +
+            '<div class="title"><b>' + data.title + "</b></div>" +
             '<div class="content"><a href="' + self.URL +'">' + self.URL + "</a></div>" +
             '<div class="content">' + self.street + "</div>" +
             '<div class="content">' + self.city + "</div>" +
