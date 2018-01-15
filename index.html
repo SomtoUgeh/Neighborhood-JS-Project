@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Udacity Neighborhood Map Project </title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="search-bar" id="search-bar">
+        <input placeholder="Search for your favourite place" class="search-box" id="search-box" data-bind="textInput: searchTerm, valueUpdate: 'afterkeydown'" />
+    </div>
+    <div class="app-container" id="app-container">
+        <div class="venue-list" id="venue-list">
+            <ul class="venue" id="venue" data-bind="foreach: filteredList">
+                <li class="place" id="place" data-bind="text: name, click: bounce"></li>
+            </ul>
+        </div>
+        <div class="map" id="map">If you can read this, there has been an error loading Google Maps. Please Try Again.</div>
+    </div>
+
+<script src='libs/knockout-3.4.0.js'></script>
+<script src='libs/jquery-1.12.0.min.js'></script>
+<script src='js/app.js'></script>
+</body>
+</html>
