@@ -69,9 +69,7 @@ Location = function(data) {
     clientSecret = '5Y2UT2PWZRKVXBM0GJ5DBGRAXFK02M45XZVLAMYQSZMQVZWT';
 
     // Foursquare API endpoint build
-    var fourSquareURL =  'https://api.foursquare.com/v2/venues/search?ll='
-        + this.position.lat + ',' + this.position.lng + '&client_id=' + clientID
-        + '&client_secret=' + clientSecret + '&v=20170801' + '&query=' + this.name;
+    var fourSquareURL =  'https://api.foursquare.com/v2/venues/search?ll=' + this.position.lat + ',' + this.position.lng + '&client_id=' + clientID + '&client_secret=' + clientSecret + '&v=20170801' + '&query=' + this.name;
 
     // Gets the data from foursquare and store it into its' own variables.
     $.getJSON(fourSquareURL).done(function (data) {
