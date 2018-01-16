@@ -1,7 +1,6 @@
 
 // Global Variables & Default Locations
 var map;
-var Location;
 var clientID;
 var clientSecret;
 
@@ -53,7 +52,7 @@ var defaultLocations = [
 
 
 // Working with the foursquare API
-Location = function(data) {
+ var Location = function(data) {
     var self = this;
     this.name = data.title;
     this.position = data.location;
@@ -82,6 +81,9 @@ Location = function(data) {
         self.street = results.location.formattedAddress[0];
         self.city = results.location.formattedAddress[1];
         self.phone = results.contact.phone;
+        if (typeof self.phone === 'undefined') {
+            self.phone = '';
+        }
 
     }).fail(function () {
         $('.venue-list').html('There was an error with the Foursquare API call. Please refresh the page and try again');

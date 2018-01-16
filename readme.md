@@ -15,7 +15,12 @@ The app is responsive, too! It resizes using CSS grids and media queries.
 
 It can also recalibrate itself based on your screen size. Try resizing the window! 🖥 📲
 
-
+# How to Run the Application
+1. Download the src code from the repo or git clone it to your local machine.
+2. Unzip the folder it is in.
+3. Open the folder in an Text-editor, preferably Webstorm by JetBrains (Cause I like them).
+4. open the index.html file in a browser
+5. Feel free to go through the code and digest it
 
 
 # How To Use
