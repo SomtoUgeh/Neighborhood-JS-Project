@@ -147,7 +147,7 @@ Location = function(data) {
 };
 
 
-// Working with Google Maps API
+// Working with Google Maps API / View model
 function ViewModel(){
     var self = this;
 
