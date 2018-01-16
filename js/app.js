@@ -104,7 +104,7 @@ Location = function(data) {
 
     // Placing the markers
     this.marker = new google.maps.Marker({
-        position: new google.maps.LatLng(data.location[0], data.location[1]),
+        position: new google.maps.LatLng(data.location.lat, data.location.lng),
         title: data.title,
         map: map
     });
@@ -160,7 +160,7 @@ function ViewModel(){
     // Constructor creates a new map
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
-        center: {lat: 37.370, lng: -122.002},
+        center: {lat: 36.9863342, lng: -122.0324849},
         mapTypeControl: false
     });
 
@@ -196,5 +196,7 @@ function errorHandling() {
 
 function runApp() {
     ko.applyBindings(new ViewModel());
+    this.mapElem = document.getElementById('map');
+    this.mapElem.style.height = window.innerHeight - 50;
 }
 

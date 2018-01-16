@@ -35,9 +35,14 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="115" column="16" lean-forward="true" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="16" />
-              <folding />
+            <state relative-caret-position="365">
+              <caret line="113" column="37" lean-forward="true" selection-start-line="113" selection-start-column="37" selection-end-line="113" selection-end-column="37" />
+              <folding>
+                <element signature="e#5083#5151#0" expanded="false" />
+                <element signature="e#5387#5962#0" expanded="false" />
+                <element signature="n#!!block;n#errorHandling#0" expanded="false" />
+                <element signature="n#!!block;n#runApp#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -157,12 +162,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516045862320</updated>
-      <workItem from="1516045866748" duration="10406000" />
+      <workItem from="1516045866748" duration="12258000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10406000" />
+    <option name="totallyTimeSpent" value="12258000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -193,7 +198,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -234,9 +241,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="115" column="16" lean-forward="true" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="16" />
-          <folding />
+        <state relative-caret-position="365">
+          <caret line="113" column="37" lean-forward="true" selection-start-line="113" selection-start-column="37" selection-end-line="113" selection-end-column="37" />
+          <folding>
+            <element signature="e#5083#5151#0" expanded="false" />
+            <element signature="e#5387#5962#0" expanded="false" />
+            <element signature="n#!!block;n#errorHandling#0" expanded="false" />
+            <element signature="n#!!block;n#runApp#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
